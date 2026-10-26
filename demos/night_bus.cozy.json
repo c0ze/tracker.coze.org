@@ -1,0 +1,65 @@
+{
+ "layers": [
+  {
+   "name": "bass",
+   "channels": [
+    2
+   ],
+   "above": 0
+  },
+  {
+   "name": "hat",
+   "channels": [
+    1
+   ],
+   "above": 0.3
+  },
+  {
+   "name": "drums",
+   "channels": [
+    0
+   ],
+   "above": 0.5
+  },
+  {
+   "name": "keys",
+   "channels": [
+    3,
+    4,
+    5
+   ],
+   "above": 0.7
+  }
+ ],
+ "sections": {
+  "intro": [
+   0,
+   0
+  ],
+  "groove": [
+   1,
+   2
+  ],
+  "lead": [
+   3,
+   4
+  ],
+  "full": [
+   5,
+   6
+  ],
+  "leadB": [
+   7,
+   8
+  ],
+  "breakdown": [
+   9,
+   9
+  ],
+  "outro": [
+   12,
+   12
+  ]
+ },
+ "loop": "groove"
+}

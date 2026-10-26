@@ -1,0 +1,3225 @@
+{
+ "title": "Pixel Rain",
+ "bpm": 120,
+ "ticks": 6,
+ "mixvol": 80,
+ "message": "Created by Gemini 3.1 Pro · 2026-09-23\nD minor track demonstrating canon shimmer and vibrato.\nSource: songs/pixel_rain.gen.js.",
+ "samples": [
+  {
+   "name": "square lead",
+   "synth": {
+    "wave": "square",
+    "pulse": 0.5,
+    "seconds": 1.5,
+    "decay": 15
+   }
+  },
+  {
+   "name": "triangle bass",
+   "synth": {
+    "wave": "triangle"
+   }
+  },
+  {
+   "name": "arp pluck",
+   "synth": {
+    "wave": "square",
+    "pulse": 0.125,
+    "seconds": 0.5,
+    "decay": 30
+   }
+  },
+  {
+   "name": "chip kick",
+   "synth": {
+    "wave": "kick",
+    "seconds": 0.13,
+    "decay": 29,
+    "freqStart": 185,
+    "freqEnd": 52,
+    "sweep": 34
+   }
+  },
+  {
+   "name": "noise snare",
+   "synth": {
+    "wave": "noise",
+    "seconds": 0.095,
+    "decay": 34,
+    "seed": 702
+   }
+  },
+  {
+   "name": "noise hat",
+   "synth": {
+    "wave": "noise",
+    "seconds": 0.08,
+    "decay": 42,
+    "seed": 703
+   }
+  }
+ ],
+ "channelnames": {
+  "0": "lead",
+  "1": "bass",
+  "2": "shimmer main",
+  "3": "shimmer echo 1",
+  "4": "shimmer echo 2",
+  "5": "kick/snare"
+ },
+ "patterns": [
+  {
+   "name": "00 intro shimmer",
+   "rows": 64,
+   "channels": [
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "1": {
+      "vol": "v23"
+     },
+     "5": {
+      "vol": "v8"
+     },
+     "6": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "7": {
+      "vol": "v23"
+     },
+     "11": {
+      "vol": "v8"
+     },
+     "12": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "13": {
+      "vol": "v23"
+     },
+     "15": {
+      "vol": "v8"
+     },
+     "16": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "17": {
+      "vol": "v23"
+     },
+     "21": {
+      "vol": "v8"
+     },
+     "22": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "23": {
+      "vol": "v23"
+     },
+     "27": {
+      "vol": "v8"
+     },
+     "28": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "29": {
+      "vol": "v23"
+     },
+     "31": {
+      "vol": "v8"
+     },
+     "32": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "33": {
+      "vol": "v23"
+     },
+     "37": {
+      "vol": "v8"
+     },
+     "38": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "39": {
+      "vol": "v23"
+     },
+     "43": {
+      "vol": "v8"
+     },
+     "44": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "45": {
+      "vol": "v23"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "49": {
+      "vol": "v23"
+     },
+     "53": {
+      "vol": "v8"
+     },
+     "54": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "55": {
+      "vol": "v23"
+     },
+     "59": {
+      "vol": "v8"
+     },
+     "60": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "61": {
+      "vol": "v23"
+     },
+     "62": {
+      "vol": "v8"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30",
+      "fx": "X50"
+     },
+     "1": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "2": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "3": {
+      "note": "^^"
+     },
+     "4": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "5": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "6": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "7": {
+      "note": "^^"
+     },
+     "8": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "9": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "10": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "11": {
+      "note": "^^"
+     },
+     "12": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "13": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "14": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "15": {
+      "note": "^^"
+     },
+     "16": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "17": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "18": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "19": {
+      "note": "^^"
+     },
+     "20": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "21": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "22": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "23": {
+      "note": "^^"
+     },
+     "24": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "25": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "26": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "27": {
+      "note": "^^"
+     },
+     "28": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "29": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "30": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "31": {
+      "note": "^^"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "33": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "34": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "35": {
+      "note": "^^"
+     },
+     "36": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "37": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "38": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "39": {
+      "note": "^^"
+     },
+     "40": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "41": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "42": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "43": {
+      "note": "^^"
+     },
+     "44": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "45": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "46": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "47": {
+      "note": "^^"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "49": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "50": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "51": {
+      "note": "^^"
+     },
+     "52": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "53": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "54": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "55": {
+      "note": "^^"
+     },
+     "56": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "57": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "58": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "59": {
+      "note": "^^"
+     },
+     "60": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "61": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "62": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "XB0"
+     },
+     "1": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "2": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "3": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "4": {
+      "note": "^^"
+     },
+     "5": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "6": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "7": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "8": {
+      "note": "^^"
+     },
+     "9": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "10": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "11": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "12": {
+      "note": "^^"
+     },
+     "13": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "14": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "15": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "16": {
+      "note": "^^"
+     },
+     "17": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "18": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "19": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "20": {
+      "note": "^^"
+     },
+     "21": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "22": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "23": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "24": {
+      "note": "^^"
+     },
+     "25": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "26": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "27": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "28": {
+      "note": "^^"
+     },
+     "29": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "30": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "31": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "32": {
+      "note": "^^"
+     },
+     "33": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "34": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "35": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "36": {
+      "note": "^^"
+     },
+     "37": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "38": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "39": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "40": {
+      "note": "^^"
+     },
+     "41": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "42": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "43": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "44": {
+      "note": "^^"
+     },
+     "45": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "46": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "47": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "48": {
+      "note": "^^"
+     },
+     "49": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "50": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "51": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "52": {
+      "note": "^^"
+     },
+     "53": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "54": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "55": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "56": {
+      "note": "^^"
+     },
+     "57": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "58": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "59": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "60": {
+      "note": "^^"
+     },
+     "61": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "62": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "63": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     },
+     "2": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "3": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "4": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "5": {
+      "note": "^^"
+     },
+     "6": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "7": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "8": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "9": {
+      "note": "^^"
+     },
+     "10": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "11": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "12": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "13": {
+      "note": "^^"
+     },
+     "14": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "15": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "16": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "17": {
+      "note": "^^"
+     },
+     "18": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "19": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "20": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "21": {
+      "note": "^^"
+     },
+     "22": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "23": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "24": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "25": {
+      "note": "^^"
+     },
+     "26": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "27": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "28": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "29": {
+      "note": "^^"
+     },
+     "30": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "31": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "33": {
+      "note": "^^"
+     },
+     "34": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "35": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "36": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "37": {
+      "note": "^^"
+     },
+     "38": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "39": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "40": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "41": {
+      "note": "^^"
+     },
+     "42": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "43": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "44": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "45": {
+      "note": "^^"
+     },
+     "46": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "47": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "48": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "49": {
+      "note": "^^"
+     },
+     "50": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "51": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "52": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "53": {
+      "note": "^^"
+     },
+     "54": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "55": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "56": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "57": {
+      "note": "^^"
+     },
+     "58": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "59": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "60": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "61": {
+      "note": "^^"
+     },
+     "62": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "63": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     }
+    },
+    {
+     "0": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20",
+      "fx": "X80"
+     },
+     "16": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "32": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "63": {
+      "note": "^^"
+     }
+    }
+   ]
+  },
+  {
+   "name": "01 A / melody enters",
+   "rows": 64,
+   "channels": [
+    {
+     "0": {
+      "note": "D-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "1": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "2": {
+      "fx": "H32"
+     },
+     "3": {
+      "fx": "H32"
+     },
+     "4": {
+      "fx": "H32"
+     },
+     "5": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "6": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "7": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "8": {
+      "fx": "H32"
+     },
+     "9": {
+      "fx": "H32"
+     },
+     "10": {
+      "fx": "H32"
+     },
+     "11": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "12": {
+      "note": "E-5",
+      "instrument": 0,
+      "vol": "v34",
+      "fx": "X80"
+     },
+     "13": {
+      "vol": "v20"
+     },
+     "15": {
+      "vol": "v7"
+     },
+     "16": {
+      "note": "D-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "17": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "18": {
+      "fx": "H32"
+     },
+     "19": {
+      "fx": "H32"
+     },
+     "20": {
+      "fx": "H32"
+     },
+     "21": {
+      "fx": "H32"
+     },
+     "22": {
+      "fx": "H32"
+     },
+     "23": {
+      "fx": "H32"
+     },
+     "24": {
+      "fx": "H32"
+     },
+     "25": {
+      "fx": "H32"
+     },
+     "26": {
+      "fx": "H32"
+     },
+     "27": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "28": {
+      "note": "A-4",
+      "instrument": 0,
+      "vol": "v30"
+     },
+     "29": {
+      "vol": "v18"
+     },
+     "31": {
+      "vol": "v7"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "33": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "34": {
+      "fx": "H32"
+     },
+     "35": {
+      "fx": "H32"
+     },
+     "36": {
+      "fx": "H32"
+     },
+     "37": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "38": {
+      "note": "A-5",
+      "instrument": 0,
+      "vol": "v40",
+      "fx": "H32"
+     },
+     "39": {
+      "vol": "v24",
+      "fx": "H32"
+     },
+     "40": {
+      "fx": "H32"
+     },
+     "41": {
+      "fx": "H32"
+     },
+     "42": {
+      "fx": "H32"
+     },
+     "43": {
+      "vol": "v9",
+      "fx": "H32"
+     },
+     "44": {
+      "note": "G-5",
+      "instrument": 0,
+      "vol": "v36"
+     },
+     "45": {
+      "vol": "v22"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "49": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "50": {
+      "fx": "H32"
+     },
+     "51": {
+      "fx": "H32"
+     },
+     "52": {
+      "fx": "H32"
+     },
+     "53": {
+      "fx": "H32"
+     },
+     "54": {
+      "fx": "H32"
+     },
+     "55": {
+      "fx": "H32"
+     },
+     "56": {
+      "fx": "H32"
+     },
+     "57": {
+      "fx": "H32"
+     },
+     "58": {
+      "fx": "H32"
+     },
+     "59": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "60": {
+      "note": "E-5",
+      "instrument": 0,
+      "vol": "v30"
+     },
+     "61": {
+      "vol": "v18"
+     },
+     "62": {
+      "vol": "v7"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "1": {
+      "vol": "v23"
+     },
+     "5": {
+      "vol": "v8"
+     },
+     "6": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "7": {
+      "vol": "v23"
+     },
+     "11": {
+      "vol": "v8"
+     },
+     "12": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "13": {
+      "vol": "v23"
+     },
+     "15": {
+      "vol": "v8"
+     },
+     "16": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "17": {
+      "vol": "v23"
+     },
+     "21": {
+      "vol": "v8"
+     },
+     "22": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "23": {
+      "vol": "v23"
+     },
+     "27": {
+      "vol": "v8"
+     },
+     "28": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "29": {
+      "vol": "v23"
+     },
+     "31": {
+      "vol": "v8"
+     },
+     "32": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "33": {
+      "vol": "v23"
+     },
+     "37": {
+      "vol": "v8"
+     },
+     "38": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "39": {
+      "vol": "v23"
+     },
+     "43": {
+      "vol": "v8"
+     },
+     "44": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "45": {
+      "vol": "v23"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "49": {
+      "vol": "v23"
+     },
+     "53": {
+      "vol": "v8"
+     },
+     "54": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "55": {
+      "vol": "v23"
+     },
+     "59": {
+      "vol": "v8"
+     },
+     "60": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "61": {
+      "vol": "v23"
+     },
+     "62": {
+      "vol": "v8"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X50"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "XB0"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "8": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "16": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "24": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "32": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "40": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "56": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "63": {
+      "note": "^^"
+     }
+    }
+   ]
+  },
+  {
+   "name": "02 A / melody with beat",
+   "rows": 64,
+   "channels": [
+    {
+     "0": {
+      "note": "D-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "1": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "2": {
+      "fx": "H32"
+     },
+     "3": {
+      "fx": "H32"
+     },
+     "4": {
+      "fx": "H32"
+     },
+     "5": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "6": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "7": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "8": {
+      "fx": "H32"
+     },
+     "9": {
+      "fx": "H32"
+     },
+     "10": {
+      "fx": "H32"
+     },
+     "11": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "12": {
+      "note": "E-5",
+      "instrument": 0,
+      "vol": "v34",
+      "fx": "X80"
+     },
+     "13": {
+      "vol": "v20"
+     },
+     "15": {
+      "vol": "v7"
+     },
+     "16": {
+      "note": "D-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "17": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "18": {
+      "fx": "H32"
+     },
+     "19": {
+      "fx": "H32"
+     },
+     "20": {
+      "fx": "H32"
+     },
+     "21": {
+      "fx": "H32"
+     },
+     "22": {
+      "fx": "H32"
+     },
+     "23": {
+      "fx": "H32"
+     },
+     "24": {
+      "fx": "H32"
+     },
+     "25": {
+      "fx": "H32"
+     },
+     "26": {
+      "fx": "H32"
+     },
+     "27": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "28": {
+      "note": "A-4",
+      "instrument": 0,
+      "vol": "v30"
+     },
+     "29": {
+      "vol": "v18"
+     },
+     "31": {
+      "vol": "v7"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "33": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "34": {
+      "fx": "H32"
+     },
+     "35": {
+      "fx": "H32"
+     },
+     "36": {
+      "fx": "H32"
+     },
+     "37": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "38": {
+      "note": "A-5",
+      "instrument": 0,
+      "vol": "v40",
+      "fx": "H32"
+     },
+     "39": {
+      "vol": "v24",
+      "fx": "H32"
+     },
+     "40": {
+      "fx": "H32"
+     },
+     "41": {
+      "fx": "H32"
+     },
+     "42": {
+      "fx": "H32"
+     },
+     "43": {
+      "vol": "v9",
+      "fx": "H32"
+     },
+     "44": {
+      "note": "G-5",
+      "instrument": 0,
+      "vol": "v36"
+     },
+     "45": {
+      "vol": "v22"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "F-5",
+      "instrument": 0,
+      "vol": "v38",
+      "fx": "H32"
+     },
+     "49": {
+      "vol": "v23",
+      "fx": "H32"
+     },
+     "50": {
+      "fx": "H32"
+     },
+     "51": {
+      "fx": "H32"
+     },
+     "52": {
+      "fx": "H32"
+     },
+     "53": {
+      "fx": "H32"
+     },
+     "54": {
+      "fx": "H32"
+     },
+     "55": {
+      "fx": "H32"
+     },
+     "56": {
+      "fx": "H32"
+     },
+     "57": {
+      "fx": "H32"
+     },
+     "58": {
+      "fx": "H32"
+     },
+     "59": {
+      "vol": "v8",
+      "fx": "H32"
+     },
+     "60": {
+      "note": "E-5",
+      "instrument": 0,
+      "vol": "v30"
+     },
+     "61": {
+      "vol": "v18"
+     },
+     "62": {
+      "vol": "v7"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "1": {
+      "vol": "v23"
+     },
+     "5": {
+      "vol": "v8"
+     },
+     "6": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "7": {
+      "vol": "v23"
+     },
+     "11": {
+      "vol": "v8"
+     },
+     "12": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "13": {
+      "vol": "v23"
+     },
+     "15": {
+      "vol": "v8"
+     },
+     "16": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "17": {
+      "vol": "v23"
+     },
+     "21": {
+      "vol": "v8"
+     },
+     "22": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "23": {
+      "vol": "v23"
+     },
+     "27": {
+      "vol": "v8"
+     },
+     "28": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "29": {
+      "vol": "v23"
+     },
+     "31": {
+      "vol": "v8"
+     },
+     "32": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "33": {
+      "vol": "v23"
+     },
+     "37": {
+      "vol": "v8"
+     },
+     "38": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "39": {
+      "vol": "v23"
+     },
+     "43": {
+      "vol": "v8"
+     },
+     "44": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "45": {
+      "vol": "v23"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "49": {
+      "vol": "v23"
+     },
+     "53": {
+      "vol": "v8"
+     },
+     "54": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "55": {
+      "vol": "v23"
+     },
+     "59": {
+      "vol": "v8"
+     },
+     "60": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "61": {
+      "vol": "v23"
+     },
+     "62": {
+      "vol": "v8"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X50"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "XB0"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "8": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "16": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "24": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "32": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "40": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v35"
+     },
+     "56": {
+      "note": "C-5",
+      "instrument": 4,
+      "vol": "v30"
+     },
+     "63": {
+      "note": "^^"
+     }
+    }
+   ]
+  },
+  {
+   "name": "03 breakdown / shimmer returns",
+   "rows": 64,
+   "channels": [
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "1": {
+      "vol": "v23"
+     },
+     "5": {
+      "vol": "v8"
+     },
+     "6": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "7": {
+      "vol": "v23"
+     },
+     "11": {
+      "vol": "v8"
+     },
+     "12": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "13": {
+      "vol": "v23"
+     },
+     "15": {
+      "vol": "v8"
+     },
+     "16": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "17": {
+      "vol": "v23"
+     },
+     "21": {
+      "vol": "v8"
+     },
+     "22": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "23": {
+      "vol": "v23"
+     },
+     "27": {
+      "vol": "v8"
+     },
+     "28": {
+      "note": "A#2",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "29": {
+      "vol": "v23"
+     },
+     "31": {
+      "vol": "v8"
+     },
+     "32": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "33": {
+      "vol": "v23"
+     },
+     "37": {
+      "vol": "v8"
+     },
+     "38": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "39": {
+      "vol": "v23"
+     },
+     "43": {
+      "vol": "v8"
+     },
+     "44": {
+      "note": "F-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "45": {
+      "vol": "v23"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "49": {
+      "vol": "v23"
+     },
+     "53": {
+      "vol": "v8"
+     },
+     "54": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "55": {
+      "vol": "v23"
+     },
+     "59": {
+      "vol": "v8"
+     },
+     "60": {
+      "note": "C-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "61": {
+      "vol": "v23"
+     },
+     "62": {
+      "vol": "v8"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30",
+      "fx": "X50"
+     },
+     "1": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "2": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "3": {
+      "note": "^^"
+     },
+     "4": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "5": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "6": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "7": {
+      "note": "^^"
+     },
+     "8": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "9": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "10": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "11": {
+      "note": "^^"
+     },
+     "12": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "13": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "14": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "15": {
+      "note": "^^"
+     },
+     "16": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "17": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "18": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "19": {
+      "note": "^^"
+     },
+     "20": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "21": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "22": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "23": {
+      "note": "^^"
+     },
+     "24": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "25": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "26": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "27": {
+      "note": "^^"
+     },
+     "28": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "29": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "30": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "31": {
+      "note": "^^"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "33": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "34": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "35": {
+      "note": "^^"
+     },
+     "36": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "37": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "38": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "39": {
+      "note": "^^"
+     },
+     "40": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "41": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "42": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "43": {
+      "note": "^^"
+     },
+     "44": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "45": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "46": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "47": {
+      "note": "^^"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "49": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "50": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "51": {
+      "note": "^^"
+     },
+     "52": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "53": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "54": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "55": {
+      "note": "^^"
+     },
+     "56": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "57": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "58": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "59": {
+      "note": "^^"
+     },
+     "60": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "61": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "62": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v30"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "XB0"
+     },
+     "1": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "2": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "3": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "4": {
+      "note": "^^"
+     },
+     "5": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "6": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "7": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "8": {
+      "note": "^^"
+     },
+     "9": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "10": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "11": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "12": {
+      "note": "^^"
+     },
+     "13": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "14": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "15": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "16": {
+      "note": "^^"
+     },
+     "17": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "18": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "19": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "20": {
+      "note": "^^"
+     },
+     "21": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "22": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "23": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "24": {
+      "note": "^^"
+     },
+     "25": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "26": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "27": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "28": {
+      "note": "^^"
+     },
+     "29": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "30": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "31": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "32": {
+      "note": "^^"
+     },
+     "33": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "34": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "35": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "36": {
+      "note": "^^"
+     },
+     "37": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "38": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "39": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "40": {
+      "note": "^^"
+     },
+     "41": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "42": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "43": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "44": {
+      "note": "^^"
+     },
+     "45": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "46": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "47": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "48": {
+      "note": "^^"
+     },
+     "49": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "50": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "51": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "52": {
+      "note": "^^"
+     },
+     "53": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "54": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "55": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "56": {
+      "note": "^^"
+     },
+     "57": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "58": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "59": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "60": {
+      "note": "^^"
+     },
+     "61": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "62": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v18"
+     },
+     "63": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v18"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     },
+     "2": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "3": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "4": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "5": {
+      "note": "^^"
+     },
+     "6": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "7": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "8": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "9": {
+      "note": "^^"
+     },
+     "10": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "11": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "12": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "13": {
+      "note": "^^"
+     },
+     "14": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "15": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "16": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "17": {
+      "note": "^^"
+     },
+     "18": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "19": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "20": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "21": {
+      "note": "^^"
+     },
+     "22": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "23": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "24": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "25": {
+      "note": "^^"
+     },
+     "26": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "27": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "28": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "29": {
+      "note": "^^"
+     },
+     "30": {
+      "note": "A#4",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "31": {
+      "note": "D-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "32": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "33": {
+      "note": "^^"
+     },
+     "34": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "35": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "36": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "37": {
+      "note": "^^"
+     },
+     "38": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "39": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "40": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "41": {
+      "note": "^^"
+     },
+     "42": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "43": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "44": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "45": {
+      "note": "^^"
+     },
+     "46": {
+      "note": "F-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "47": {
+      "note": "A-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "48": {
+      "note": "C-6",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "49": {
+      "note": "^^"
+     },
+     "50": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "51": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "52": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "53": {
+      "note": "^^"
+     },
+     "54": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "55": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "56": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "57": {
+      "note": "^^"
+     },
+     "58": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "59": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "60": {
+      "note": "G-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "61": {
+      "note": "^^"
+     },
+     "62": {
+      "note": "C-5",
+      "instrument": 2,
+      "vol": "v11"
+     },
+     "63": {
+      "note": "E-5",
+      "instrument": 2,
+      "vol": "v11"
+     }
+    },
+    {
+     "0": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20",
+      "fx": "X80"
+     },
+     "16": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "32": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "63": {
+      "note": "^^"
+     }
+    }
+   ]
+  },
+  {
+   "name": "04 outro",
+   "rows": 64,
+   "channels": [
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35",
+      "fx": "X80"
+     },
+     "1": {
+      "vol": "v23"
+     },
+     "5": {
+      "vol": "v8"
+     },
+     "6": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "7": {
+      "vol": "v23"
+     },
+     "11": {
+      "vol": "v8"
+     },
+     "12": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "13": {
+      "vol": "v23"
+     },
+     "15": {
+      "vol": "v8"
+     },
+     "16": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "17": {
+      "vol": "v23"
+     },
+     "21": {
+      "vol": "v8"
+     },
+     "22": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "23": {
+      "vol": "v23"
+     },
+     "27": {
+      "vol": "v8"
+     },
+     "28": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "29": {
+      "vol": "v23"
+     },
+     "31": {
+      "vol": "v8"
+     },
+     "32": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "33": {
+      "vol": "v23"
+     },
+     "37": {
+      "vol": "v8"
+     },
+     "38": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "39": {
+      "vol": "v23"
+     },
+     "43": {
+      "vol": "v8"
+     },
+     "44": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "45": {
+      "vol": "v23"
+     },
+     "47": {
+      "vol": "v8"
+     },
+     "48": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "49": {
+      "vol": "v23"
+     },
+     "53": {
+      "vol": "v8"
+     },
+     "54": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "55": {
+      "vol": "v23"
+     },
+     "59": {
+      "vol": "v8"
+     },
+     "60": {
+      "note": "D-3",
+      "instrument": 1,
+      "vol": "v35"
+     },
+     "61": {
+      "vol": "v23"
+     },
+     "62": {
+      "vol": "v8"
+     },
+     "63": {
+      "note": "^^"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X50"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "XB0"
+     }
+    },
+    {
+     "0": {
+      "note": "^^",
+      "fx": "X80"
+     }
+    },
+    {
+     "0": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20",
+      "fx": "X80"
+     },
+     "16": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "32": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "48": {
+      "note": "C-5",
+      "instrument": 3,
+      "vol": "v20"
+     },
+     "63": {
+      "note": "^^"
+     }
+    }
+   ]
+  }
+ ],
+ "order": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ]
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cozy-tracker — listen</title>
+<link rel="icon" href="../assets/logo.png">
+<style>
+  :root {
+    --bg:#0b0d12; --panel:#14171f; --panel2:#1b1f2b; --line:#2a3040;
+    --text:#e6e9ef; --dim:#8b93a7;
+    --cyan:#4fc1ff; --magenta:#ff5ac0; --gold:#e0a458; --green:#7ee787;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); min-height:100vh;
+    font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  a { color:var(--cyan); text-decoration:none; }
+  .wrap { max-width:760px; margin:0 auto; padding:1.5rem 1.25rem 3rem; }
+  header { display:flex; align-items:center; gap:.75rem; margin-bottom:1.2rem; }
+  header img { width:34px; height:34px; border-radius:8px; }
+  header h1 { font:600 .95rem/1 ui-monospace,monospace; letter-spacing:.18em; color:var(--cyan); margin:0; }
+  header h1 small { color:var(--dim); letter-spacing:.05em; }
+  header nav { margin-left:auto; font-size:.85rem; display:flex; gap:1rem; }
+  header nav a { color:var(--dim); }
+  header nav a:hover { color:var(--cyan); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="../assets/logo.png" alt="">
+    <h1>COZY_TRACKER <small>· listen</small></h1>
+    <nav><a href="../">home</a><a href="../player/">tracker</a><a href="https://github.com/c0ze/cozy-tracker">github</a></nav>
+  </header>
+  <div id="jukebox"></div>
+</div>
+<script type="module">
+  import { mountJukebox } from './jukebox.js';
+  mountJukebox(document.getElementById('jukebox'), { base: '../demos/', keyboard: true });
+</script>
+</body>
+</html>

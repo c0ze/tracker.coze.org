@@ -1,0 +1,70 @@
+{
+ "layers": [
+  {
+   "name": "core",
+   "channels": [
+    3,
+    4
+   ],
+   "above": 0
+  },
+  {
+   "name": "riff",
+   "channels": [
+    5
+   ],
+   "above": 0.25
+  },
+  {
+   "name": "drums",
+   "channels": [
+    0,
+    1,
+    2
+   ],
+   "above": 0.45
+  },
+  {
+   "name": "stabs",
+   "channels": [
+    7
+   ],
+   "above": 0.65
+  },
+  {
+   "name": "lead",
+   "channels": [
+    6,
+    8
+   ],
+   "above": 0.8
+  }
+ ],
+ "sections": {
+  "intro": [
+   0,
+   2
+  ],
+  "explore": [
+   7,
+   8
+  ],
+  "bridge": [
+   9,
+   9
+  ],
+  "combat": [
+   11,
+   14
+  ],
+  "boss": [
+   16,
+   17
+  ],
+  "finale": [
+   20,
+   20
+  ]
+ },
+ "loop": "explore"
+}

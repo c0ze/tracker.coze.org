@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cozy-tracker — adaptive game music, generated</title>
+<meta name="description" content="Describe the mood — get an adaptive score that reacts to your game, in kilobytes, not megabytes, cleared to ship.">
+<link rel="icon" href="assets/logo.png">
+<meta property="og:title" content="cozy-tracker">
+<meta property="og:description" content="Adaptive game music, generated. Describe the mood — get a score that reacts to your game.">
+<meta property="og:image" content="https://tracker.coze.org/assets/banner.png">
+<style>
+  :root {
+    --bg:#0b0d12; --panel:#14171f; --panel2:#1b1f2b; --line:#2a3040;
+    --text:#e6e9ef; --dim:#8b93a7;
+    --cyan:#4fc1ff; --magenta:#ff5ac0; --gold:#e0a458; --green:#7ee787; --purple:#a071ff;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  code, pre, .mono { font-family:ui-monospace,"SF Mono",Menlo,monospace; }
+  a { color:var(--cyan); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 1.25rem; }
+  .btn {
+    display:inline-block; padding:.6rem 1.15rem; border-radius:8px; font-weight:600;
+    border:1px solid var(--line); color:var(--text); background:var(--panel2); cursor:pointer;
+  }
+  .btn:hover { border-color:var(--cyan); text-decoration:none; }
+  .btn.primary {
+    background:linear-gradient(90deg,var(--magenta),var(--gold)); color:#12060f; border:none;
+  }
+
+  /* hero */
+  header { position:relative; overflow:hidden; border-bottom:1px solid var(--line); }
+  header::after { /* scanlines */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+    mix-blend-mode:multiply;
+  }
+  .hero-img { display:block; width:min(960px, calc(100% - 2.5rem)); margin:1.4rem auto 0;
+    border-radius:14px; border:1px solid var(--line); box-shadow:0 10px 44px rgba(0,0,0,.5); }
+  .hero-copy { text-align:center; padding:2.2rem 1.25rem 2.6rem; }
+  .hero-copy h1 { font-size:1.05rem; letter-spacing:.34em; color:var(--cyan); margin:0 0 1rem; text-transform:uppercase; }
+  .tagline { font-size:clamp(1.4rem,4vw,2.1rem); font-weight:700; line-height:1.25; margin:0 auto; max-width:20ch; }
+  .tagline b { background:linear-gradient(90deg,var(--cyan),var(--green),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .sub { color:var(--dim); margin:1rem auto 1.6rem; max-width:52ch; }
+  .cta { display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; }
+
+  section { padding:3rem 0; border-bottom:1px solid var(--line); }
+  h2 { font-size:1.5rem; margin:0 0 .4rem; }
+  h2 .k { color:var(--magenta); font:600 .8rem/1 ui-monospace,monospace; letter-spacing:.2em; display:block; margin-bottom:.5rem; text-transform:uppercase; }
+  .lead { color:var(--dim); max-width:64ch; margin:0 0 1.6rem; }
+
+  .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.2rem; }
+  .card h3 { margin:.2rem 0 .4rem; font-size:1.05rem; }
+  .card .ic { font-size:1.4rem; }
+  .card p { margin:0; color:var(--dim); font-size:.94rem; }
+
+  pre { background:#0a0c10; border:1px solid var(--line); border-radius:10px; padding:1rem 1.15rem; overflow-x:auto; font-size:.86rem; line-height:1.5; }
+  .cmt { color:#5b6577; }
+  .str { color:var(--green); } .fn { color:var(--cyan); } .kw { color:var(--magenta); }
+  .tabs { display:flex; gap:.4rem; margin-bottom:.6rem; flex-wrap:wrap; }
+  .tab { padding:.3rem .8rem; border:1px solid var(--line); border-radius:7px; background:var(--panel2); cursor:pointer; font:600 .82rem/1 ui-monospace,monospace; color:var(--dim); }
+  .tab.on { color:#12060f; background:var(--gold); border-color:var(--gold); }
+
+  .demos { display:grid; gap:.6rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+  .demo { display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.7rem .9rem; }
+  .demo .meta small { color:var(--dim); display:block; font-size:.8rem; }
+  .demo .meta small.credit { color:var(--gold); font:600 .68rem/1.6 ui-monospace,monospace; letter-spacing:.04em; }
+
+  footer { padding:2.4rem 0 3rem; color:var(--dim); font-size:.9rem; }
+  footer a { color:var(--dim); text-decoration:underline; }
+  .swatch { display:inline-block; width:.7em; height:.7em; border-radius:2px; vertical-align:baseline; margin-right:.15em; }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="hero-img" src="assets/banner.png" alt="cozy-tracker">
+  <div class="wrap" style="padding-top:1.1rem; position:relative; z-index:1;">
+    <div id="jukebox"></div>
+  </div>
+  <div class="hero-copy">
+    <h1>adaptive game music, generated</h1>
+    <p class="tagline">Describe the mood — get a score that <b>reacts to your game</b>.</p>
+    <p class="sub">One tiny module that layers, transitions, and re-scores itself in real time.
+      No stem stacks. No crossfade rigs. Kilobytes, not megabytes, cleared to ship.</p>
+    <div class="cta">
+      <a class="btn primary" href="player/?song=../demos/night_bus.it">Open the tracker</a>
+      <a class="btn" href="https://github.com/c0ze/cozy-tracker">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <h2><span class="k">Why it exists</span>Game music shouldn't be a flat loop.</h2>
+    <p class="lead">You get two bad options: license an eight-bar loop that plays the same whether the
+      player is picking flowers or fighting for their life — or hand-build a multi-stem crossfade rig
+      that bloats your download and still only fades between fixed mixes. Interactive worlds deserve
+      music that reacts like the rest of the game does. cozy-tracker generates music that <em>is</em>
+      the adaptive system: described in plain language, rendered from a clean-to-ship sample library,
+      dropped into your engine with two lines of code.</p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2><span class="k">What makes it different</span>Not a music player. A music <em>system</em>.</h2>
+    <div class="grid">
+      <div class="card"><div class="ic">🎚️</div><h3>Adaptive by construction</h3>
+        <p>Each instrument is its own channel. Intensity is just muting layers; transitions are jumps between named sections — one file, with transitions scheduled at pattern boundaries.</p></div>
+      <div class="card"><div class="ic">✨</div><h3>Generated, not hand-drawn</h3>
+        <p>Describe it, get it. Batch a whole soundtrack in CI. Spin twelve variations for procedural levels from a seed.</p></div>
+      <div class="card"><div class="ic">🌉</div><h3>LLM transitions</h3>
+        <p>Ask for a bridge that walks your combat theme into exploration — matched in key and tempo — and get a module that connects them.</p></div>
+      <div class="card"><div class="ic">⚖️</div><h3>Cleared to ship</h3>
+        <p>Every sound traces to a public-domain or CC0 source in a provenance ledger. No sample-license landmines in your release.</p></div>
+      <div class="card"><div class="ic">🪶</div><h3>Kilobytes, not megabytes</h3>
+        <p>An adaptive score here is 15–290&nbsp;KB. A five-stem rig is tens of MB. That gap decides whether your web or mobile game ships with music.</p></div>
+      <div class="card"><div class="ic">🧪</div><h3>Music QA, automated</h3>
+        <p>A linter catches dissonance and register clashes before you hear them. Offline rendering + metering make a soundtrack you can regression-test.</p></div>
+      <div class="card"><div class="ic">🧩</div><h3>Data-driven</h3>
+        <p>Songs are JSON — diffable, versioned, seedable, parameterizable by the game itself. Your soundtrack is source code.</p></div>
+      <div class="card"><div class="ic">🎮</div><h3>Drop-in for every engine</h3>
+        <p>Small runtime bundles for web, Godot, Unity and more expose the same two calls. The hard part — reaching in to mute layers — is done for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="dropin">
+  <div class="wrap">
+    <h2><span class="k">Drop it into your game</span>Do your <span class="mono">.it</span>, wrap, drop in.</h2>
+    <p class="lead">Alongside every module, cozy emits a manifest describing its layers and sections.
+      Your game reads the module + manifest and gets <span class="mono">setIntensity()</span> and
+      <span class="mono">transitionTo()</span>.</p>
+    <pre><span class="cmt">// siege_engine.cozy.json — emitted next to siege_engine.it (real output)</span>
+{ <span class="str">"layers"</span>: [ { <span class="str">"name"</span>:<span class="str">"core"</span>,  <span class="str">"channels"</span>:[3,4],   <span class="str">"above"</span>:0    },
+             { <span class="str">"name"</span>:<span class="str">"riff"</span>,  <span class="str">"channels"</span>:[5],     <span class="str">"above"</span>:0.25 },
+             { <span class="str">"name"</span>:<span class="str">"drums"</span>, <span class="str">"channels"</span>:[0,1,2], <span class="str">"above"</span>:0.45 },
+             { <span class="str">"name"</span>:<span class="str">"stabs"</span>, <span class="str">"channels"</span>:[7],     <span class="str">"above"</span>:0.65 },
+             { <span class="str">"name"</span>:<span class="str">"lead"</span>,  <span class="str">"channels"</span>:[6,8],   <span class="str">"above"</span>:0.8  } ],
+  <span class="str">"sections"</span>: { <span class="str">"explore"</span>:[7,8], <span class="str">"bridge"</span>:[9,9], <span class="str">"combat"</span>:[11,14], <span class="str">"boss"</span>:[16,17] },
+  <span class="str">"loop"</span>: <span class="str">"explore"</span> }</pre>
+    <div class="tabs" role="tablist" aria-label="engine">
+      <button type="button" class="tab on" role="tab" aria-selected="true" aria-controls="snippet" data-t="web">web</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="snippet" data-t="godot">godot</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="snippet" data-t="unity">unity</button>
+    </div>
+    <pre id="snippet" role="tabpanel"></pre>
+  </div>
+</section>
+
+<section id="live">
+  <div class="wrap">
+    <h2><span class="k">Feel it</span>The score reacts. Right here.</h2>
+    <p class="lead">This is <em>Siege Engine</em> — one generated 190&nbsp;KB module + its manifest,
+      driven by the same two calls your game would make. Change the game state; the music
+      transitions at the next musical boundary. Drag intensity; layers drop in and out live.</p>
+    <div class="card" id="demoPanel">
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center;">
+        <button class="btn primary" id="dStart">▶ start the demo</button>
+        <span id="dState" class="mono" style="color:var(--dim); font-size:.85rem;"></span>
+      </div>
+      <div id="dControls" style="display:none; margin-top:1rem;">
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+          <span style="color:var(--dim); font-size:.85rem;">game state:</span>
+          <button class="btn" data-sec="explore">🌿 Explore</button>
+          <button class="btn" data-sec="combat">⚔️ Combat</button>
+          <button class="btn" data-sec="boss">💀 Boss</button>
+          <label style="color:var(--dim); font-size:.83rem;"><input type="checkbox" id="dVia" checked> route through the bridge</label>
+          <span style="flex:1"></span>
+          <button class="btn" id="dStop">■</button>
+        </div>
+        <div style="display:flex; gap:.8rem; align-items:center; margin-top:.9rem;">
+          <span style="color:var(--dim); font-size:.85rem;">intensity</span>
+          <input type="range" id="dIntensity" min="0" max="1" step="0.01" value="1" style="flex:1; accent-color:var(--gold);">
+          <span id="dLayers" class="mono" style="color:var(--green); font-size:.8rem; min-width:20ch;"></span>
+        </div>
+        <canvas id="dScope" style="width:100%; height:44px; margin-top:.9rem; background:#0a0c10; border-radius:8px;"></canvas>
+      </div>
+      <pre style="margin:.9rem 0 0; font-size:.8rem;" id="dCode"><span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'siege_engine.it'</span>, <span class="str">'siege_engine.cozy.json'</span>);</pre>
+    </div>
+
+    <h2 style="margin-top:2.6rem;"><span class="k">Two songs, one file</span>A generated bridge between them.</h2>
+    <p class="lead">Combat music and exploration music are <em>different songs</em> — different key,
+      tempo, and feel. cozy composed a bridge that walks one into the other (an E pedal resolving
+      into A&nbsp;minor while the clock ramps 150&nbsp;→&nbsp;112&nbsp;BPM) and merged all three into a
+      single 280&nbsp;KB module. One call crosses between songs, musically.</p>
+    <div class="card">
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center;">
+        <button class="btn primary" id="bStart">▶ start</button>
+        <button class="btn" id="bSiege" style="display:none;">⚔️ Siege Engine</button>
+        <button class="btn" id="bNight" style="display:none;">🌙 Night Bus</button>
+        <span id="bState" class="mono" style="color:var(--dim); font-size:.85rem;"></span>
+        <span style="flex:1"></span>
+        <button class="btn" id="bStop" style="display:none;">■</button>
+      </div>
+      <pre style="margin:.9rem 0 0; font-size:.8rem;" id="bCode"><span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'siege_to_night.it'</span>, <span class="str">'siege_to_night.cozy.json'</span>);</pre>
+    </div>
+  </div>
+</section>
+
+<section id="demos">
+  <div class="wrap">
+    <h2><span class="k">Hear it</span>Sixteen modules, all generated.</h2>
+    <p class="lead">Every track was composed by the pipeline from public-domain or synthesized samples, then rendered
+      to a self-contained module. Open one in the browser player — pattern view, per-channel
+      solo/mute, oscilloscope. Each is credited with the model that composed it and the date, so the list tracks progress.</p>
+    <div class="demos">
+      <div class="demo"><div class="meta">Neon Glow<small>A minor upbeat chiptune</small><small class="credit">Gemini 3.1 Pro · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/neon_glow.it" aria-label="open Neon Glow in the player">▶</a></div>
+      <div class="demo"><div class="meta">Pixel Rain<small>D minor atmospheric · canon shimmer</small><small class="credit">Gemini 3.1 Pro · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/pixel_rain.it" aria-label="open Pixel Rain in the player">▶</a></div>
+      <div class="demo"><div class="meta">Pocket Tram<small>Bb major chip-pop · syncopated groove</small><small class="credit">Gpt-6 Astra · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/pocket_tram.it" aria-label="open Pocket Tram in the player">▶</a></div>
+      <div class="demo"><div class="meta">Copper Kite<small>E Dorian chase · clipped pulse hook</small><small class="credit">Gpt-6 Astra · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/copper_kite.it" aria-label="open Copper Kite in the player">▶</a></div>
+      <div class="demo"><div class="meta">Moth Clock<small>D minor chip waltz</small><small class="credit">Gpt-6 Astra · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/moth_clock.it" aria-label="open Moth Clock in the player">▶</a></div>
+      <div class="demo"><div class="meta">Glass Harbor<small>F major nocturne · slow reflections</small><small class="credit">Gpt-6 Astra · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/glass_harbor.it" aria-label="open Glass Harbor in the player">▶</a></div>
+      <div class="demo"><div class="meta">Peach Orchard<small>bright chip-pop</small><small class="credit">Claude Opus 5.5 · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/peach_orchard.it" aria-label="open Peach Orchard in the player">▶</a></div>
+      <div class="demo"><div class="meta">Tide Pool Radio<small>D dorian drift</small><small class="credit">Claude Opus 5.5 · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/tide_pool_radio.it" aria-label="open Tide Pool Radio in the player">▶</a></div>
+      <div class="demo"><div class="meta">Crypt Lanterns<small>12/8 dungeon gallop</small><small class="credit">Claude Opus 5.5 · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/crypt_lanterns.it" aria-label="open Crypt Lanterns in the player">▶</a></div>
+      <div class="demo"><div class="meta">Skyline Relay<small>G minor chase</small><small class="credit">Claude Opus 5.5 · 2026-09-23</small></div><a class="btn" href="player/?song=../demos/skyline_relay.it" aria-label="open Skyline Relay in the player">▶</a></div>
+      <div class="demo"><div class="meta">Lantern Walk<small>gentle chip · composition study</small><small class="credit">model not recorded · 2026-09-08</small></div><a class="btn" href="player/?song=../demos/lantern_walk.it" aria-label="open Lantern Walk in the player">▶</a></div>
+      <div class="demo"><div class="meta">Night Bus<small>laid-back groove · chords and flute</small><small class="credit">Claude Fable 5 · 2026-07-12</small></div><a class="btn" href="player/?song=../demos/night_bus.it" aria-label="open Night Bus in the player">▶</a></div>
+      <div class="demo"><div class="meta">First Light<small>melodic · key-change climax</small><small class="credit">Claude Fable 5 · 2026-07-12</small></div><a class="btn" href="player/?song=../demos/first_light.it" aria-label="open First Light in the player">▶</a></div>
+      <div class="demo"><div class="meta">Siege Engine<small>aggressive driver</small><small class="credit">Claude Fable 5 · 2026-07-12</small></div><a class="btn" href="player/?song=../demos/siege_engine.it" aria-label="open Siege Engine in the player">▶</a></div>
+      <div class="demo"><div class="meta">Winter Orbit<small>sparse ambient</small><small class="credit">Claude Fable 5 · 2026-07-12</small></div><a class="btn" href="player/?song=../demos/winter_orbit.it" aria-label="open Winter Orbit in the player">▶</a></div>
+      <div class="demo"><div class="meta">Paper Hearts<small>chip-pop</small><small class="credit">Claude Fable 5 · 2026-07-12</small></div><a class="btn" href="player/?song=../demos/paper_hearts.it" aria-label="open Paper Hearts in the player">▶</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--text)">cozy-tracker</b> — describe the mood, get an adaptive score that reacts to your game, in kilobytes, cleared to ship.</p>
+    <p>Playback via libopenmpt (BSD). Samples: AKWF &amp; Saga Musix (public-domain / free-use).
+      <a href="https://github.com/c0ze/cozy-tracker">Source on GitHub</a> ·
+      <a href="listen/">Listen</a> ·
+      <a href="player/">Tracker</a></p>
+  </div>
+</footer>
+
+<script>
+  // engine snippet tabs
+  const SNIPPETS = {
+    web:
+`<span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'level1.it'</span>, <span class="str">'level1.cozy.json'</span>);
+music.<span class="fn">setIntensity</span>(0.7);      <span class="cmt">// mutes layers above the threshold</span>
+music.<span class="fn">transitionTo</span>(<span class="str">'combat'</span>); <span class="cmt">// request at the next pattern boundary</span>`,
+    godot:
+`<span class="kw">var</span> music = CozyAdaptive.<span class="fn">create</span>(self, <span class="str">"res://music/level1.it"</span>, <span class="str">"res://music/level1.cozy.json"</span>)
+music.<span class="fn">set_intensity</span>(0.7)
+music.<span class="fn">transition_to</span>(<span class="str">"combat"</span>)`,
+    unity:
+`<span class="cmt">// Unity wrapper is planned; not implemented yet.
+// Use libopenmpt integration in your project.</span>`,
+  };
+  const snip = document.getElementById('snippet');
+  const setSnip = (t) => { snip.innerHTML = SNIPPETS[t]; };
+  document.querySelectorAll('.tab').forEach(el => el.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.toggle('on', t === el);
+      t.setAttribute('aria-selected', String(t === el));
+    });
+    setSnip(el.dataset.t);
+  }));
+  setSnip('web');
+</script>
+<script type="module">
+  import { mountJukebox } from './listen/jukebox.js';
+  // One audio source at a time: the adaptive demos listen for this and stop.
+  window.cozyJukebox = mountJukebox(document.getElementById('jukebox'), {
+    base: 'demos/', collapsedPlaylist: true,
+    onPlay: () => window.dispatchEvent(new Event('cozy:jukebox-play')),
+  });
+</script>
+<script type="module">
+  import { CozyAdaptive } from './player/cozy-adaptive.js';
+
+  let music = null, analyser = null, scopeData = null;
+  const $ = (id) => document.getElementById(id);
+  const codeEl = $('dCode');
+
+  const showCall = (line) => {
+    codeEl.innerHTML = line;
+  };
+  addEventListener('cozy:jukebox-play', () => {
+    if (music) $('dStop').click();
+    if (music2) $('bStop').click();
+  });
+
+  $('dStart').addEventListener('click', async () => {
+    if (music) return;
+    if (music2) $('bStop').click(); // one demo at a time
+    window.cozyJukebox?.stopAll();
+    $('dStart').disabled = true;
+    $('dState').textContent = 'loading…';
+    try {
+      music = await CozyAdaptive.create('demos/siege_engine.it', 'demos/siege_engine.cozy.json', { intensity: 1 });
+      analyser = music.player.context.createAnalyser();
+      analyser.fftSize = 1024;
+      scopeData = new Float32Array(analyser.fftSize);
+      music.player.gain.connect(analyser);
+      music.onSection((s) => { $('dState').textContent = `section: ${s}`; });
+      music.onProgress((d) => { $('dState').textContent = `section: ${music.section} · ord ${d.order} · row ${String(d.row).padStart(2, '0')}`; });
+      $('dControls').style.display = 'block';
+      $('dLayers').textContent = music.activeLayers().join(' + ');
+      drawScope();
+    } catch (e) {
+      $('dState').textContent = 'demo failed to load: ' + e.message;
+      $('dStart').disabled = false;
+    }
+  });
+
+  document.querySelectorAll('[data-sec]').forEach((btn) => btn.addEventListener('click', () => {
+    if (!music) return;
+    const via = $('dVia').checked && btn.dataset.sec !== 'boss' ? 'bridge' : undefined;
+    music.transitionTo(btn.dataset.sec, { via });
+    showCall(`music.<span class="fn">transitionTo</span>(<span class="str">'${btn.dataset.sec}'</span>${via ? `, { via: <span class="str">'bridge'</span> }` : ''});`);
+  }));
+
+  $('dIntensity').addEventListener('input', (e) => {
+    if (!music) return;
+    music.setIntensity(parseFloat(e.target.value));
+    $('dLayers').textContent = music.activeLayers().join(' + ') || '(silence)';
+    showCall(`music.<span class="fn">setIntensity</span>(${(+e.target.value).toFixed(2)});  <span class="cmt">// ${music.activeLayers().join(' + ') || 'all layers muted'}</span>`);
+  });
+
+  $('dStop').addEventListener('click', () => {
+    if (!music) return;
+    music.dispose();
+    music = null;
+    $('dControls').style.display = 'none';
+    $('dStart').disabled = false;
+    $('dState').textContent = '';
+    showCall(`<span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'siege_engine.it'</span>, <span class="str">'siege_engine.cozy.json'</span>);`);
+  });
+
+  // --- demo 2: two songs, one file, generated bridge ---
+  let music2 = null;
+  const bCode = $('bCode');
+  $('bStart').addEventListener('click', async () => {
+    if (music2) return;
+    if (music) $('dStop').click(); // one demo at a time
+    window.cozyJukebox?.stopAll();
+    $('bStart').disabled = true;
+    $('bState').textContent = 'loading…';
+    try {
+      music2 = await CozyAdaptive.create('demos/siege_to_night.it', 'demos/siege_to_night.cozy.json', { intensity: 1 });
+      music2.onProgress((d) => { $('bState').textContent = `section: ${music2.section} · ord ${d.order}`; });
+      for (const id of ['bSiege', 'bNight', 'bStop']) $(id).style.display = 'inline-block';
+    } catch (e) {
+      $('bState').textContent = 'demo failed to load: ' + e.message;
+      $('bStart').disabled = false;
+    }
+  });
+  $('bNight').addEventListener('click', () => {
+    if (!music2) return;
+    music2.transitionTo('nb:groove', { via: 'bridge' });
+    bCode.innerHTML = `music.<span class="fn">transitionTo</span>(<span class="str">'nb:groove'</span>, { via: <span class="str">'bridge'</span> });  <span class="cmt">// E pedal → Am, 150 → 112 BPM</span>`;
+  });
+  $('bSiege').addEventListener('click', () => {
+    if (!music2) return;
+    music2.transitionTo('siege:explore', { via: 'siege:bridge' });
+    bCode.innerHTML = `music.<span class="fn">transitionTo</span>(<span class="str">'siege:explore'</span>, { via: <span class="str">'siege:bridge'</span> });`;
+  });
+  $('bStop').addEventListener('click', () => {
+    if (!music2) return;
+    music2.dispose();
+    music2 = null;
+    for (const id of ['bSiege', 'bNight', 'bStop']) $(id).style.display = 'none';
+    $('bStart').disabled = false;
+    $('bState').textContent = '';
+  });
+
+  function drawScope() {
+    if (!music) return;
+    requestAnimationFrame(drawScope);
+    const c = $('dScope');
+    const dpr = devicePixelRatio || 1;
+    const r = c.getBoundingClientRect();
+    if (c.width !== Math.round(r.width * dpr)) { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); }
+    const ctx = c.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, r.width, r.height);
+    analyser.getFloatTimeDomainData(scopeData);
+    const grad = ctx.createLinearGradient(0, 0, r.width, 0);
+    grad.addColorStop(0, '#4fc1ff'); grad.addColorStop(.5, '#ff5ac0'); grad.addColorStop(1, '#e0a458');
+    ctx.strokeStyle = grad; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    const step = scopeData.length / r.width;
+    for (let x = 0; x < r.width; x++) {
+      const y = r.height / 2 - (scopeData[Math.floor(x * step)] || 0) * r.height * .45;
+      x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+  }
+</script>
+</body>
+</html>

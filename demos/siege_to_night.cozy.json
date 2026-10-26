@@ -1,0 +1,132 @@
+{
+ "layers": [
+  {
+   "name": "siege:core",
+   "channels": [
+    3,
+    4
+   ],
+   "above": 0
+  },
+  {
+   "name": "siege:riff",
+   "channels": [
+    5
+   ],
+   "above": 0.25
+  },
+  {
+   "name": "siege:drums",
+   "channels": [
+    0,
+    1,
+    2
+   ],
+   "above": 0.45
+  },
+  {
+   "name": "siege:stabs",
+   "channels": [
+    7
+   ],
+   "above": 0.65
+  },
+  {
+   "name": "siege:lead",
+   "channels": [
+    6,
+    8
+   ],
+   "above": 0.8
+  },
+  {
+   "name": "nb:bass",
+   "channels": [
+    11
+   ],
+   "above": 0
+  },
+  {
+   "name": "nb:hat",
+   "channels": [
+    10
+   ],
+   "above": 0.3
+  },
+  {
+   "name": "nb:drums",
+   "channels": [
+    9
+   ],
+   "above": 0.5
+  },
+  {
+   "name": "nb:keys",
+   "channels": [
+    12,
+    13,
+    14
+   ],
+   "above": 0.7
+  }
+ ],
+ "sections": {
+  "siege:intro": [
+   0,
+   2
+  ],
+  "siege:explore": [
+   7,
+   8
+  ],
+  "siege:bridge": [
+   9,
+   9
+  ],
+  "siege:combat": [
+   11,
+   14
+  ],
+  "siege:boss": [
+   16,
+   17
+  ],
+  "siege:finale": [
+   20,
+   20
+  ],
+  "bridge": [
+   21,
+   22
+  ],
+  "nb:intro": [
+   23,
+   23
+  ],
+  "nb:groove": [
+   24,
+   25
+  ],
+  "nb:lead": [
+   26,
+   27
+  ],
+  "nb:full": [
+   28,
+   29
+  ],
+  "nb:leadB": [
+   30,
+   31
+  ],
+  "nb:breakdown": [
+   32,
+   32
+  ],
+  "nb:outro": [
+   35,
+   35
+  ]
+ },
+ "loop": "siege:explore"
+}
