@@ -50,10 +50,22 @@ export function mergeSongs(a, b, opts = {}) {
   });
   if (samples.length > 255) throw new Error('merge exceeds 255 samples');
 
-  const remapChn = (chn, label, orderLength, orderOffset = 0, instMap = null) => {
+  // gv: the song's loudness compensation (0..128). Its own global-volume commands are scaled
+  // by it, so a later Vxx keeps the song at its authored level. A Wxy slide's step is scaled
+  // too (at least 1); its ramp is then approximate, and it can still run past the song's level.
+  const remapChn = (chn, label, orderLength, orderOffset = 0, instMap = null, gv = 128) => {
     const out = {};
     for (const [r, ev] of Object.entries(chn)) {
       const mapped = { ...ev };
+      if (gv !== 128 && /^V[0-9A-Fa-f]{2}$/.test(ev.fx)) mapped.fx = 'V' + hex2(Math.min(128, parseInt(ev.fx.slice(1), 16)) * gv / 128);
+      else if (gv !== 128 && /^W[0-9A-Fa-f]{2}$/.test(ev.fx)) {
+        const v = parseInt(ev.fx.slice(1), 16), hi = v >> 4, lo = v & 15;
+        const scale = (n) => (n ? Math.max(1, Math.round((n * gv) / 128)) : 0);
+        // W00 repeats the last slide; fine slides (xF, Fx) keep their F.
+        if (v && hi !== 15 && lo !== 15) mapped.fx = 'W' + hex2((scale(hi) << 4) | scale(lo));
+        else if (v && hi === 15 && lo !== 15) mapped.fx = 'W' + hex2(0xf0 | scale(lo));
+        else if (v && lo === 15 && hi !== 15) mapped.fx = 'W' + hex2((scale(hi) << 4) | 15);
+      }
       if (instMap && ev.instrument !== undefined) mapped.instrument = instMap[ev.instrument];
       if (/^B[0-9A-Fa-f]{2}$/.test(ev.fx)) {
         const target = parseInt(ev.fx.slice(1), 16);
@@ -116,11 +128,11 @@ export function mergeSongs(a, b, opts = {}) {
     return { ...p, channels: padTo(p.channels.map(ch => remapChn(ch, 'bridge', orderLength)), totalCh) };
   });
 
-  const aPats = a.patterns.map(p => stamp({ ...p, channels: p.channels.map(ch => remapChn(ch, 'A', aOrdLen)) },
+  const aPats = a.patterns.map(p => stamp({ ...p, channels: p.channels.map(ch => remapChn(ch, 'A', aOrdLen, 0, null, gvFor(a))) },
     { bpm: a.bpm, ticks: a.ticks, gv: gvFor(a) }));
   const bPats = b.patterns.map(p => stamp({ ...p, channels: [
     ...Array.from({ length: chA }, () => ({})),
-    ...p.channels.map(ch => remapChn(ch, 'B', b.order.length, bOrdBase, bInst)),
+    ...p.channels.map(ch => remapChn(ch, 'B', b.order.length, bOrdBase, bInst, gvFor(b))),
   ] }, { bpm: b.bpm, ticks: b.ticks, gv: gvFor(b) }));
 
   const bridgePatBase = a.patterns.length;

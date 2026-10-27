@@ -282,26 +282,59 @@ music.<span class="fn">transition_to</span>(<span class="str">"combat"</span>)`,
 <script type="module">
   import { CozyAdaptive } from './player/cozy-adaptive.js';
 
-  let music = null, analyser = null, scopeData = null;
+  let music = null, music2 = null, analyser = null, scopeData = null;
+  // One audio source at a time. Every start and stop takes a new owner generation, so a
+  // demo whose create() resolves after the jukebox, the other demo or ■ took over is
+  // disposed instead of playing alongside.
+  let owner = 0, scopeFrame = 0;
   const $ = (id) => document.getElementById(id);
   const codeEl = $('dCode');
 
   const showCall = (line) => {
     codeEl.innerHTML = line;
   };
-  addEventListener('cozy:jukebox-play', () => {
-    if (music) $('dStop').click();
-    if (music2) $('bStop').click();
-  });
+  function idleDemo1() {
+    cancelAnimationFrame(scopeFrame);
+    music?.dispose();
+    music = null;
+    $('dControls').style.display = 'none';
+    $('dStart').disabled = false;
+    $('dState').textContent = '';
+    showCall(`<span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'siege_engine.it'</span>, <span class="str">'siege_engine.cozy.json'</span>);`);
+  }
+  function idleDemo2() {
+    music2?.dispose();
+    music2 = null;
+    for (const id of ['bSiege', 'bNight', 'bStop']) $(id).style.display = 'none';
+    $('bStart').disabled = false;
+    $('bState').textContent = '';
+  }
+  // Stops both demos, playing or still loading.
+  function silenceDemos() { owner++; idleDemo1(); idleDemo2(); }
+  // Starts a demo as the only audio source; resolves to null when it lost ownership.
+  async function claim(load) {
+    silenceDemos();
+    window.cozyJukebox?.stopAll();
+    const mine = owner;
+    try {
+      const created = await load();
+      if (mine === owner) return created;
+      created.dispose();
+    } catch (e) {
+      if (mine === owner) throw e;
+    }
+    return null;
+  }
+  addEventListener('cozy:jukebox-play', silenceDemos);
 
   $('dStart').addEventListener('click', async () => {
     if (music) return;
-    if (music2) $('bStop').click(); // one demo at a time
-    window.cozyJukebox?.stopAll();
+    const loading = claim(() => CozyAdaptive.create('demos/siege_engine.it', 'demos/siege_engine.cozy.json', { intensity: 1 }));
     $('dStart').disabled = true;
     $('dState').textContent = 'loading…';
     try {
-      music = await CozyAdaptive.create('demos/siege_engine.it', 'demos/siege_engine.cozy.json', { intensity: 1 });
+      music = await loading;
+      if (!music) return;
       analyser = music.player.context.createAnalyser();
       analyser.fftSize = 1024;
       scopeData = new Float32Array(analyser.fftSize);
@@ -333,25 +366,20 @@ music.<span class="fn">transition_to</span>(<span class="str">"combat"</span>)`,
 
   $('dStop').addEventListener('click', () => {
     if (!music) return;
-    music.dispose();
-    music = null;
-    $('dControls').style.display = 'none';
-    $('dStart').disabled = false;
-    $('dState').textContent = '';
-    showCall(`<span class="kw">const</span> music = <span class="kw">await</span> CozyAdaptive.<span class="fn">create</span>(<span class="str">'siege_engine.it'</span>, <span class="str">'siege_engine.cozy.json'</span>);`);
+    owner++;
+    idleDemo1();
   });
 
   // --- demo 2: two songs, one file, generated bridge ---
-  let music2 = null;
   const bCode = $('bCode');
   $('bStart').addEventListener('click', async () => {
     if (music2) return;
-    if (music) $('dStop').click(); // one demo at a time
-    window.cozyJukebox?.stopAll();
+    const loading = claim(() => CozyAdaptive.create('demos/siege_to_night.it', 'demos/siege_to_night.cozy.json', { intensity: 1 }));
     $('bStart').disabled = true;
     $('bState').textContent = 'loading…';
     try {
-      music2 = await CozyAdaptive.create('demos/siege_to_night.it', 'demos/siege_to_night.cozy.json', { intensity: 1 });
+      music2 = await loading;
+      if (!music2) return;
       music2.onProgress((d) => { $('bState').textContent = `section: ${music2.section} · ord ${d.order}`; });
       for (const id of ['bSiege', 'bNight', 'bStop']) $(id).style.display = 'inline-block';
     } catch (e) {
@@ -371,16 +399,13 @@ music.<span class="fn">transition_to</span>(<span class="str">"combat"</span>)`,
   });
   $('bStop').addEventListener('click', () => {
     if (!music2) return;
-    music2.dispose();
-    music2 = null;
-    for (const id of ['bSiege', 'bNight', 'bStop']) $(id).style.display = 'none';
-    $('bStart').disabled = false;
-    $('bState').textContent = '';
+    owner++;
+    idleDemo2();
   });
 
   function drawScope() {
     if (!music) return;
-    requestAnimationFrame(drawScope);
+    scopeFrame = requestAnimationFrame(drawScope);
     const c = $('dScope');
     const dpr = devicePixelRatio || 1;
     const r = c.getBoundingClientRect();

@@ -98,13 +98,14 @@ function analyzeModule(file, opts = {}) {
         const rawVolFx = lib._openmpt_module_get_pattern_row_channel_command(mod, p, r, c, CMD.VOLEFFECT);
         const rawFx = lib._openmpt_module_get_pattern_row_channel_command(mod, p, r, c, CMD.EFFECT);
         if (rawNote || rawInst || rawVolFx || rawFx) usedCells++;
+        // An instrument on a row without a note still selects it for the bare notes that follow.
+        if (rawInst) perChannel[c].instruments.add(rawInst);
         if (rawNote > 0 && rawNote < 128) { // real note (128+ = keyoff/cut/fade specials)
           noteEvents++;
           const pc = perChannel[c];
           pc.notes++;
           if (rawNote < pc.min) pc.min = rawNote;
           if (rawNote > pc.max) pc.max = rawNote;
-          if (rawInst) pc.instruments.add(rawInst);
         }
         if (rawFx) {
           const letter = fmtCell(mod, p, r, c, CMD.EFFECT);

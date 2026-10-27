@@ -42,8 +42,9 @@ export class CozyAdaptive {
 
   /**
    * Load module + manifest and start. Rejects (instead of hanging) when the
-   * worklet, manifest or module cannot load, or after opts.timeout ms
-   * (default 15000). A failed create closes the AudioContext it opened.
+   * worklet, manifest or module cannot load, or when the whole load takes longer
+   * than opts.timeout ms (default 15000). A failed create aborts its downloads and
+   * closes the AudioContext it opened.
    */
   static async create(moduleUrl, manifest, opts = {}) {
     const g = globalThis;
@@ -56,18 +57,31 @@ export class CozyAdaptive {
       ? opts.createPlayer()
       : new ChiptuneJsPlayer({ repeatCount: -1, context: opts.context });
     const ownsContext = !opts.context;
+    // One deadline covers every step; each step races it, named for the error.
+    const abort = new AbortController();
+    const waiters = [];
+    let stage = 'audio worklet', timer;
+    const deadline = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`${stage} did not load within ${timeout} ms`)), timeout);
+    });
+    deadline.catch(() => {}); // a step that is racing it reports the error
+    const step = (what, promise) => { stage = what; return Promise.race([promise, deadline]); };
     try {
-      const initialized = waitFor(player, 'onInitialized', timeout, 'audio worklet');
-      if (typeof manifest === 'string') manifest = await fetchChecked(manifest, (r) => r.json());
+      const initialized = waitFor(player, 'onInitialized', 'audio worklet', waiters);
+      if (typeof manifest === 'string') manifest = await step(manifest, fetchChecked(manifest, (r) => r.json(), abort.signal));
       validateManifest(manifest);
-      const buf = await fetchChecked(moduleUrl, (r) => r.arrayBuffer());
-      await initialized;
-      const ready = waitFor(player, 'onMetadata', timeout, 'module');
+      const buf = await step(moduleUrl, fetchChecked(moduleUrl, (r) => r.arrayBuffer(), abort.signal));
+      await step('audio worklet', initialized);
+      const ready = waitFor(player, 'onMetadata', 'module', waiters);
       player.play(buf);
-      await ready;
+      await step('module', ready);
     } catch (e) {
+      abort.abort();
       disposePlayer(player, ownsContext);
       throw e;
+    } finally {
+      clearTimeout(timer);
+      for (const settle of waiters) settle();
     }
     const ca = new CozyAdaptive(player, manifest);
     ca._ownsContext = ownsContext;
@@ -202,21 +216,26 @@ function validateManifest(m) {
   }
 }
 
-async function fetchChecked(url, read) {
-  const res = await fetch(url);
+async function fetchChecked(url, read, signal) {
+  const res = await fetch(url, { signal });
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return read(res);
 }
 
-// chiptune3 handlers cannot be removed, so each waiter ignores late events.
-function waitFor(player, event, ms, what) {
-  return new Promise((resolve, reject) => {
+// chiptune3 handlers cannot be removed, so each waiter ignores late events. A waiter
+// rejected before anyone awaits it is not an unhandled rejection; `waiters` collects the
+// settle functions create() calls on cleanup, so none is left pending.
+function waitFor(player, event, what, waiters) {
+  let settle;
+  const promise = new Promise((resolve, reject) => {
     let done = false;
-    const settle = (fn, v) => { if (!done) { done = true; clearTimeout(timer); fn(v); } };
-    const timer = setTimeout(() => settle(reject, new Error(`${what} did not load within ${ms} ms`)), ms);
+    settle = (fn = resolve, v) => { if (!done) { done = true; fn(v); } };
     player[event]((v) => settle(resolve, v));
     player.onError?.((e) => settle(reject, new Error(`${what} failed to load (${e?.type ?? 'error'})`)));
   });
+  promise.catch(() => {});
+  waiters.push(() => settle());
+  return promise;
 }
 
 function disposePlayer(player, closeContext) {

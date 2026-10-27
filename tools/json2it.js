@@ -27,9 +27,13 @@ song.samples = (song.samples || []).map(resolveSample);
 assertSong(song);
 
 const outFile = outFileArg || path.join(ROOT, "build", path.basename(inFile, path.extname(inFile)) + ".it");
-if (path.resolve(outFile) === path.resolve(inFile)) {
-  console.error(`refusing to overwrite the input: ${inFile}`);
-  process.exit(1);
+// The adaptive manifest is written next to the module: check both paths before writing either.
+const mFile = /\.it$/i.test(outFile) ? outFile.replace(/\.it$/i, ".cozy.json") : `${outFile}.cozy.json`;
+for (const out of song.adaptive ? [outFile, mFile] : [outFile]) {
+  if (path.resolve(out) === path.resolve(inFile)) {
+    console.error(`refusing to overwrite the input: ${inFile}`);
+    process.exit(1);
+  }
 }
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 
@@ -49,7 +53,6 @@ if (song.adaptive) {
     if (s > e || e >= song.order.length) console.warn(`manifest: section "${name}" [${s},${e}] outside order list (length ${song.order.length})`);
   }
   if (a.loop && !(a.sections || {})[a.loop]) console.warn(`manifest: loop section "${a.loop}" not defined`);
-  const mFile = /\.it$/i.test(outFile) ? outFile.replace(/\.it$/i, ".cozy.json") : `${outFile}.cozy.json`;
   fs.writeFileSync(mFile, JSON.stringify(a, null, 1));
   console.log(`${mFile} (adaptive manifest: ${(a.layers || []).length} layers, ${Object.keys(a.sections || {}).length} sections)`);
 }

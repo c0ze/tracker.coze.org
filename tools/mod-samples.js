@@ -37,6 +37,21 @@ export const PERIODS = [
 ];
 export const TOP_NOTE = 33;              // A-3, period 127
 export const MIN_PERIOD = 123;           // PAL minimum; slides and vibrato stay at or above it
+// ptplayer's 4xy swings the period by mt_VibratoSineTable's peak, (255 x depth) >> 7
+// each way: depth 1 is 1 period, depth 2 is 3. libopenmpt plays MOD vibrato
+// deeper (about 2 x depth - 1/4 periods), so its renders overstate small depths.
+export const vibratoSwing = (depth) => (255 * depth) >> 7;
+/**
+ * The 4xy depth (1-15) whose swing at `period` is closest to IT Hxy depth
+ * `depthIT`: with linear slides (itwriter) Hxy swings y/16 semitone each way,
+ * 6.25 cents per unit.
+ */
+export function vibratoDepth(depthIT, period) {
+  const want = period * (2 ** (depthIT / 192) - 2 ** (-depthIT / 192)) / 2;
+  let best = 1;
+  for (let d = 2; d <= 15; d++) if (Math.abs(vibratoSwing(d) - want) < Math.abs(vibratoSwing(best) - want)) best = d;
+  return best;
+}
 export const MAX_BYTES = 65535 * 2;
 // Paula holds each sample (HRM 05 "Aliasing distortion"), so harmonic k of a loop
 // at fs images at fs - k x f0; ptplayer switches the LED filter off, so images up
@@ -104,8 +119,7 @@ export function planSample(s, lo, hi, notes = null, vib = 0) {
     plan.spread = Math.max(...errs) - Math.min(...errs);
     plan.ratio = ratio / 2 ** (plan.shift / 1200);   // fewer samples a cycle: the sample plays `shift` cents higher
     const low = PERIODS[Math.min(...notes) - plan.off];
-    const depth = vib ? Math.max(1, Math.min(15, Math.round(vib * low / 520))) : 0;   // ptplayer: depth x 255 / 128 at the peak
-    plan.lowRate = PAL_CLOCK / (low + ((255 * depth) >> 7));
+    plan.lowRate = PAL_CLOCK / (low + (vib ? vibratoSwing(vibratoDepth(vib, low)) : 0));
     plan.topRate = modRate(top);
   }
   return plan;

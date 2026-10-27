@@ -1,9 +1,13 @@
 // Validate authoring mistakes that the binary writer would otherwise coerce or drop.
+import { describeSynth } from './synth.js';
+import { validateSidInstrument, validateSidSong } from './validate-sid.js';
+
 const object = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const integer = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
 export const isNote = (v) => typeof v === 'string' && /^(?:[A-G]-|[ACDFG]#)[0-9]$/.test(v);
 
-export function validateSong(song) {
+// opts.sid: accept SID instruments (tools/json2sid.js); the IT and MOD writers cannot play them.
+export function validateSong(song, opts = {}) {
   const errors = [];
   const check = (ok, where, message) => { if (!ok) errors.push(`${where}: ${message}`); };
   if (!object(song)) return ['song must be an object'];
@@ -30,18 +34,35 @@ export function validateSong(song) {
   song.samples.forEach((s, i) => {
     const at = `samples[${i}]`;
     if (!object(s)) { errors.push(`${at}: expected sample object`); return; }
-    check([s.synth, s.file, s.channels, s.buffer].filter(v => v !== undefined).length === 1,
-      at, 'choose exactly one of synth, file, channels or buffer');
+    check([s.synth, s.file, s.channels, s.buffer, s.asset, s.sid].filter(v => v !== undefined).length === 1,
+      at, 'choose exactly one of synth, file, channels, buffer, asset or sid');
+    if (s.sid !== undefined) {
+      if (opts.sid) errors.push(...validateSidInstrument(s.sid, at));
+      else errors.push(`${at}: sid instruments play only through tools/json2sid.js`);
+    }
     if (s.file !== undefined) check(typeof s.file === 'string' && s.file.length > 0, at, 'file must be a path');
+    // A hosted sample: an id the host resolves to audio it stores (tools/hosted/assets.js).
+    if (s.asset !== undefined) check(typeof s.asset === 'string' && s.asset.length > 0, at, 'asset must be an asset id');
     if (s.name !== undefined) check(typeof s.name === 'string', at, 'name must be a string');
     if (s.synth !== undefined) {
       check(object(s.synth), at, 'synth must be an object');
       if (object(s.synth)) {
-        check(['sine', 'square', 'triangle', 'saw', 'noise', 'kick', 'pluck'].includes(s.synth.wave ?? 'sine'), at, 'unknown synth wave');
-        for (const k of ['seconds', 'samplerate', 'cycle']) if (s.synth[k] !== undefined)
-          check(Number.isFinite(s.synth[k]) && s.synth[k] > 0, at, `synth.${k} must be positive`);
+        try { describeSynth(s.synth); } catch (e) { errors.push(`${at}: ${e.message}`); }
+        // Legacy waves are checked here with the same limits tools/synth.js enforces, so lint and
+        // the compiler agree; presets and library voices are checked by describeSynth above.
+        const legacy = s.synth.preset === undefined && ['sine', 'square', 'triangle', 'saw', 'noise', 'kick', 'pluck'].includes(s.synth.wave ?? 'sine');
+        const num = (v) => typeof v === 'number' && Number.isFinite(v);
+        if (legacy) {
+          for (const k of ['seconds', 'freqStart', 'freqEnd']) if (s.synth[k] !== undefined)
+            check(num(s.synth[k]) && s.synth[k] > 0, at, `synth.${k} must be positive`);
+          for (const k of ['decay', 'sweep']) if (s.synth[k] !== undefined)
+            check(num(s.synth[k]) && s.synth[k] >= 0, at, `synth.${k} must be 0 or more`);
+          if (s.synth.samplerate !== undefined) check(integer(s.synth.samplerate, 1, 1000000), at, 'synth.samplerate must be a positive integer');
+          if (s.synth.cycle !== undefined) check(integer(s.synth.cycle, 4, 1 << 20), at, 'synth.cycle must be an integer of at least 4 samples');
+          if (s.synth.seed !== undefined) check(integer(s.synth.seed, 0, 0xffffffff), at, 'synth.seed must be an unsigned 32-bit integer');
+        }
         if (s.synth.volume !== undefined) check(integer(s.synth.volume, 0, 64), at, 'synth.volume must be 0..64');
-        if (s.synth.pulse !== undefined) check(s.synth.pulse > 0 && s.synth.pulse < 1, at, 'pulse must be between 0 and 1');
+        if (s.synth.pulse !== undefined) check(num(s.synth.pulse) && s.synth.pulse > 0 && s.synth.pulse < 1, at, 'pulse must be between 0 and 1');
       }
     }
     if (s.volume !== undefined) check(integer(s.volume, 0, 64), at, 'volume must be 0..64');
@@ -49,7 +70,7 @@ export function validateSong(song) {
     if (s.detune !== undefined) check(Number.isFinite(s.detune), at, 'detune must be finite');
     for (const k of ['loop', 'susloop']) if (s[k] !== undefined) {
       const l = s[k];
-      check(k === 'loop' && l === 'cycle' && typeof s.file === 'string' ||
+      check(k === 'loop' && l === 'cycle' && (typeof s.file === 'string' || typeof s.asset === 'string') ||
         object(l) && integer(l.start ?? 0, 0, 0xffffffff) &&
         (l.end === undefined || integer(l.end, (l.start ?? 0) + 1, 0xffffffff)), at, `invalid ${k}`);
     }
@@ -104,10 +125,14 @@ export function validateSong(song) {
       if (a.loop !== undefined) check(Object.hasOwn(a.sections, a.loop), 'adaptive.loop', 'unknown section');
     }
   }
+  if (song.sid !== undefined) {
+    if (opts.sid) errors.push(...validateSidSong(song));
+    else errors.push('sid: SID songs build with tools/json2sid.js');
+  }
   return errors;
 }
 
-export function assertSong(song) {
-  const errors = validateSong(song);
+export function assertSong(song, opts) {
+  const errors = validateSong(song, opts);
   if (errors.length) throw new Error(`Invalid song:\n${errors.join('\n')}`);
 }

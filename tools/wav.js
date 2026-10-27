@@ -5,7 +5,8 @@
  * Enough for AKWF single-cycles and typical CC0 sample packs.
  */
 
-export function readWav(buffer) {
+// Parses and checks the RIFF/fmt/data structure without decoding any PCM.
+function parseWav(buffer) {
   const view = new DataView(buffer.buffer || buffer, buffer.byteOffset || 0, buffer.byteLength);
   const tag = (off) => String.fromCharCode(view.getUint8(off), view.getUint8(off + 1), view.getUint8(off + 2), view.getUint8(off + 3));
 
@@ -74,7 +75,17 @@ export function readWav(buffer) {
   const frameSize = bytesPer * fmt.numChannels;
   if (streamedData) dataLen -= dataLen % frameSize; // a stream may stop mid-frame
   if (fmt.blockAlign !== frameSize || dataLen % frameSize !== 0) throw new Error("Invalid WAV frame alignment");
-  const frames = dataLen / frameSize;
+  return { view, fmt, dataOff, bytesPer, frames: dataLen / frameSize };
+}
+
+/** The header of a WAV readWav accepts, without decoding it: { channels, frames, samplerate }. */
+export function readWavHeader(buffer) {
+  const { fmt, frames } = parseWav(buffer);
+  return { channels: fmt.numChannels, frames, samplerate: fmt.samplerate };
+}
+
+export function readWav(buffer) {
+  const { view, fmt, dataOff, bytesPer, frames } = parseWav(buffer);
   const channels = Array.from({ length: fmt.numChannels }, () => new Array(frames));
 
   for (let i = 0; i < frames; i++) {

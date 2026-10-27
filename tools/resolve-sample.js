@@ -17,42 +17,18 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { synthesize } from "./synth.js";
 import { readWav } from "./wav.js";
+import { applySampleDef } from "./sample-overrides.js";
 
 export const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const MIDDLE_C = 261.6256;
 
 export function resolveSample(def) {
   if (def.synth) {
-    const s = synthesize(def.synth);
-    const loop = def.loop ? { loop: def.loop } : {}; // validator allows only {start,end} here
-    return applyDetune({ name: def.name, ...s, ...loop, ...overrides(def) }, def);
+    return applySampleDef({ name: def.name, ...synthesize(def.synth) }, def);
   }
   if (def.file) {
     const wav = readWav(fs.readFileSync(path.resolve(ROOT, def.file)));
-    const s = { name: def.name || path.basename(def.file), ...wav };
-    if (def.loop === "cycle") {
-      const n = wav.channels[0].length;
-      s.loop = { start: 0, end: n };
-      s.c5speed = Math.round(n * MIDDLE_C);
-    } else if (def.loop) {
-      s.loop = def.loop;
-    }
-    return applyDetune({ ...s, ...overrides(def) }, def);
+    return applySampleDef({ name: path.basename(def.file), ...wav }, def);
   }
-  return applyDetune({ ...def }, def); // raw itwriter sample
-}
-
-// explicit per-sample settings win over derived ones
-function overrides(def) {
-  const out = {};
-  for (const k of ["volume", "c5speed", "susloop"]) {
-    if (def[k] !== undefined) out[k] = def[k];
-  }
-  return out;
-}
-
-// detune in cents (e.g. +4/-4 for chorus layering) applied to final c5speed
-function applyDetune(s, def) {
-  if (def.detune) s.c5speed = Math.round((s.c5speed || s.samplerate) * Math.pow(2, def.detune / 1200));
-  return s;
+  if (def.asset !== undefined) throw new Error("asset samples need the hosted resolver");
+  return applySampleDef({ ...def }, def); // raw itwriter sample
 }

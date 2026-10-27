@@ -25,14 +25,15 @@
  *
  * Slides: itwriter sets IT linear slides (1/16 semitone per unit), MOD slides
  * are in period units, so E/F/G amounts are converted at the channel's
- * playing period, which is advanced as the slide runs. Vibrato depth:
- * measured with libopenmpt, MOD 4xy swings about 25.6 cents x depth at period
- * 254 while IT Hxy swings 12.5 cents x depth, and MOD depth is in period
- * units: depth' = depth x period / 520. Slides and vibrato are limited so
+ * playing period, which is advanced as the slide runs. Vibrato depth: IT Hxy
+ * swings y/16 semitone each way, ptplayer's 4xy (255 x depth) >> 7 periods,
+ * so the depth is the one closest at the playing period (vibratoDepth in
+ * mod-samples.js; libopenmpt plays MOD vibrato deeper than ptplayer, so
+ * judge depths with mod-check, not a render). Slides and vibrato are limited so
  * Paula never goes below period 123 (see mod-samples.js); noteUsage gives
  * upward slides headroom in the sample mapping first, so the limit rarely bites.
  */
-import { PERIODS, TOP_NOTE, MIN_PERIOD } from './mod-samples.js';
+import { PERIODS, TOP_NOTE, MIN_PERIOD, vibratoDepth } from './mod-samples.js';
 
 const MAX_PERIOD = 856;
 const UNKNOWN = 'unknown';
@@ -508,7 +509,7 @@ function effect(fx, st, ctx, row, r) {
       const speed = st.Hx || 0, depthIT = st.Hy || 0;
       if (!depthIT) return out(null);
       if (st.period == null) return unknown('vibrato');
-      let depth = clamp(Math.round(depthIT * period / 520), 1, 15);
+      let depth = vibratoDepth(depthIT, period);
       const room = Math.floor((period - MIN_PERIOD) * 128 / 255);  // ptplayer: period - depth * 255 / 128 at the peak
       if (depth > room) {
         if (room < 1) { warn(`vibrato dropped: it would take Paula below period ${MIN_PERIOD}`); return out(null); }
