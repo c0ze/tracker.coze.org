@@ -32,7 +32,7 @@ jobs:
           rm -rf _site
           mkdir _site
           cp index.html CNAME _site/
-          cp -r assets listen player demos vendor tools songs _site/
+          cp -r assets listen player demos vendor tools songs sid _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
